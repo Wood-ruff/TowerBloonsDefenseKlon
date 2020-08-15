@@ -35,7 +35,7 @@ int main()
         return -1;
     }
 
-    float vertices[] = {
+    double vertices[] = {
         // positions          // colors           // texture coords
          0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
          0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
@@ -43,14 +43,10 @@ int main()
         -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
     };
 
-    unsigned int indices[] = {
-        0, 1, 3, // first triangle
-        1, 2, 3  // second triangle
-    };
 
     Game game = Game();
 
-    MoB* object = new MoB(100,100,200,200,200,vertices,indices,"./defaultVertexShader.vs", "./defaultFragmentShader.fs","../res/wall.jpg");
+    MoB* object = new MoB(100,100,200,200,200,vertices,"./defaultVertexShader.vs", "./defaultFragmentShader.fs","../res/wall.jpg");
     CTimer* timer = new CTimer();
 
     while (!glfwWindowShouldClose(window))

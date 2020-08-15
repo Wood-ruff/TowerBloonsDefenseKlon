@@ -1,7 +1,7 @@
 #include "MathUtils.h"
 #include <iostream>
 
-float MathUtils::getNormalizedCoord(int position, int screenBounds) {
+double MathUtils::getNormalizedCoord(double position, int screenBounds) {
 	if (position < 0) {
 		return -1.0f;
 	}

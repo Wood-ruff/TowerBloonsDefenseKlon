@@ -2,6 +2,6 @@
 class MathUtils
 {
 public:
-	static float getNormalizedCoord(int position, int screenBounds);
+	static double getNormalizedCoord(double position, int screenBounds);
 };
 

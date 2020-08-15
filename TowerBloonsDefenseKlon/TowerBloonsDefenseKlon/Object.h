@@ -6,7 +6,7 @@ using namespace std;
 
 class Object {
 public:
-	Object(double x,double y, double width, double height,float* vertex, unsigned int* indices, const char* vertexShader, const char* fragmentShader, const char* texturePath);
+	Object(double x,double y, double width, double height,double* vertex, const char* vertexShader, const char* fragmentShader, const char* texturePath);
 	void draw();
 	void update();
 
@@ -15,7 +15,7 @@ protected:
 	unsigned int VAO, VBO, EBO, texture;
 	double x, y;
 	Shader* shader;
-	float* vertex;
+	double* vertex;
 	double width, height;
 	unsigned int* indices;
 };
