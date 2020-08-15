@@ -33,6 +33,7 @@
     <ClCompile Include="Vector2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Game.cpp">
     <ClCompile Include="MoB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -59,10 +60,14 @@
     <ClInclude Include="Vector2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="Game.h">
+=======
     <ClInclude Include="Globals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h">
+>>>>>>> 7b4e6f055045e6600631ee96452933d05400fd70
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -71,6 +76,12 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="defaultFragmentShader.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="GameVertexShader.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="GameFragmentShader.fs">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
