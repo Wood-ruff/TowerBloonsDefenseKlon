@@ -146,6 +146,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Defines.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="MathUtils.cpp" />
     <ClCompile Include="Object.cpp" />
@@ -153,6 +154,7 @@
     <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game.h" />
     <ClInclude Include="MathUtils.h" />
     <ClInclude Include="MoB.h" />
     <ClInclude Include="Shader.h" />
@@ -163,6 +165,8 @@
   <ItemGroup>
     <None Include="defaultFragmentShader.fs" />
     <None Include="defaultVertexShader.vs" />
+    <None Include="GameFragmentShader.fs" />
+    <None Include="GameVertexShader.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

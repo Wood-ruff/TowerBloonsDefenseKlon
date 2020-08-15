@@ -33,6 +33,9 @@
     <ClCompile Include="Vector2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">
@@ -53,12 +56,21 @@
     <ClInclude Include="Vector2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="defaultVertexShader.vs">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="defaultFragmentShader.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="GameVertexShader.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="GameFragmentShader.fs">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
