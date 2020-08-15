@@ -150,12 +150,15 @@
     <ClCompile Include="MathUtils.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MathUtils.h" />
+    <ClInclude Include="MoB.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="stb_image.h" />
+    <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="defaultFragmentShader.fs" />

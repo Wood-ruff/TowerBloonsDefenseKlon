@@ -10,7 +10,7 @@ public:
 	void draw();
 	void update();
 
-private:
+protected:
 	unsigned int VAO, VBO, EBO, texture;
 	Shader* shader;
 	float* vertex;
