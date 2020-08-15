@@ -96,11 +96,9 @@ void Object::refitVertex() {
 
     this->vertex[24] = MathUtils::getNormalizedCoord(this->x, SCR_WIDTH);
     this->vertex[25] = MathUtils::getNormalizedCoord(this->y + this->height, SCR_HEIGHT);
-    std::cout << this->vertex[0]<<this->vertex[1]<<std::endl;
+    /*std::cout << this->vertex[0]<<this->vertex[1]<<std::endl;
     std::cout << this->vertex[8]<<this->vertex[9] << std::endl;
     std::cout << this->vertex[16]<<this->vertex[17] << std::endl;
-    std::cout << this->vertex[24]<<this->vertex[25] << std::endl;
-
-
+    std::cout << this->vertex[24]<<this->vertex[25] << std::endl;*/
 }
 
