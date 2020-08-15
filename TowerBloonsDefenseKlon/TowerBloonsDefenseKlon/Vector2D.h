@@ -6,8 +6,8 @@ public:
 	void add(Vector2D);
 	void divide(double);
 	void multiply(double);
-	int getX() { return x; }
-	int getY() { return y; }
+	double getX() { return x; }
+	double getY() { return y; }
 
 
 private:

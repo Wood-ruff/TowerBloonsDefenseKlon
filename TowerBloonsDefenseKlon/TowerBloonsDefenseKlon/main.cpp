@@ -58,7 +58,6 @@ int main()
 
         Vector2D* vector = new Vector2D(object->getSpeed(), object->getSpeed());
         vector->multiply(timer->getElapsed());
-        std::cout << vector->getX();
         object->move(vector);
         delete vector;
 
