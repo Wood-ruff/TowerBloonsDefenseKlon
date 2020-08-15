@@ -39,7 +39,7 @@ Object::Object(double x, double y, double width, double height,float* vertex, un
 
 	glGenTextures(1, &texture);
 
-	glBindTexture(GL_PROXY_TEXTURE_2D, texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
