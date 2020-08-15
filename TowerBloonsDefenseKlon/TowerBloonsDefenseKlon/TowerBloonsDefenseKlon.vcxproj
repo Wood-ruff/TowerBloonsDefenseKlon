@@ -147,10 +147,12 @@
   <ItemGroup>
     <ClCompile Include="Defines.cpp" />
     <ClCompile Include="glad.c" />
+    <ClCompile Include="MathUtils.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MathUtils.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="stb_image.h" />
