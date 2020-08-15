@@ -148,16 +148,20 @@
     <ClCompile Include="Defines.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="MathUtils.cpp" />
+    <ClCompile Include="MoB.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Globals.h" />
     <ClInclude Include="MathUtils.h" />
     <ClInclude Include="MoB.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="stb_image.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
