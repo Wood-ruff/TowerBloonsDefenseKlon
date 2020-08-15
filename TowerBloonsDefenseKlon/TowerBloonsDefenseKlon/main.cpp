@@ -2,11 +2,13 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include "Object.h"
+#include "Globals.h"
+#include "MoB.h"
+#include "Timer.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
-const unsigned int SCR_WIDTH = 1920;
-const unsigned int SCR_HEIGHT = 1080;
+
 
 int main()
 {
@@ -16,7 +18,7 @@ int main()
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "", glfwGetPrimaryMonitor(), NULL);
+    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "", NULL, NULL);
     if (window == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -45,11 +47,21 @@ int main()
         1, 2, 3  // second triangle
     };
 
-    Object* object = new Object(vertices,indices,"./defaultVertexShader.vs", "./defaultFragmentShader.fs","../res/wall.jpg");
+    MoB* object = new MoB(100,100,200,200,200,vertices,indices,"./defaultVertexShader.vs", "./defaultFragmentShader.fs","../res/wall.jpg");
+    CTimer* timer = new CTimer();
 
     while (!glfwWindowShouldClose(window))
     {
+        timer->update();
         processInput(window);
+
+
+        Vector2D* vector = new Vector2D(object->getSpeed(), object->getSpeed());
+        vector->multiply(timer->getElapsed());
+        std::cout << vector->getX();
+        object->move(vector);
+        delete vector;
+
 
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);

@@ -2,14 +2,15 @@
 
 class Vector2D {
 public:
-	Vector2D(int x,int y);
-	void normalize();
+	Vector2D(double, double);
 	void add(Vector2D);
+	void divide(double);
+	void multiply(double);
 	int getX() { return x; }
 	int getY() { return y; }
 
 
 private:
-	int x;
-	int y;
+	double x;
+	double y;
 };

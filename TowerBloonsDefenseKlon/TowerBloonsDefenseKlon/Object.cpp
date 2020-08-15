@@ -1,11 +1,15 @@
 #include "Object.h";
+#include "MathUtils.h";
+#include "Globals.h";
 
-Object::Object(float* vertex, unsigned int* indices, const char* vertexShader, const char* fragmentShader, const char* texturePath){
+Object::Object(double x, double y, double width, double height,float* vertex, unsigned int* indices, const char* vertexShader, const char* fragmentShader, const char* texturePath){
 	this->shader = new Shader(vertexShader, fragmentShader);
 	this->vertex = vertex;
-    this->vertexlength = vertexlength;
     this->indices = indices;
 
+    this->x = x;
+    this->y = y;
+    this->refitVertex();
 
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -43,8 +47,8 @@ Object::Object(float* vertex, unsigned int* indices, const char* vertexShader, c
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
 
-    int width, height, nrChannels;
-    unsigned char* data = stbi_load(texturePath, &width, &height, &nrChannels, 0);
+    int width1, height1, nrChannels;
+    unsigned char* data = stbi_load(texturePath, &width1, &height1, &nrChannels, 0);
     if (data) {
         // generate the texture
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -64,14 +68,31 @@ Object::Object(float* vertex, unsigned int* indices, const char* vertexShader, c
 void Object::draw() {
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texture);
-    shader->use();
     glBindVertexArray(VAO);
+    shader->use();
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }
 
 void Object::update() {
+    this->refitVertex();
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, 32 * sizeof(vertex), vertex, GL_DYNAMIC_DRAW);
+}
+
+void Object::refitVertex() {
+    this->vertex[0] = MathUtils::getNormalizedCoord(this->x + this->width,SCR_WIDTH);
+    this->vertex[1] = MathUtils::getNormalizedCoord(this->y + this->height, SCR_HEIGHT); 
+
+    //std::cout << this->vertex[0];
+
+    this->vertex[8] = MathUtils::getNormalizedCoord(this->x +this->width , SCR_WIDTH);
+    this->vertex[9] = MathUtils::getNormalizedCoord(this->y, SCR_HEIGHT);
+
+    this->vertex[16] = MathUtils::getNormalizedCoord(this->x, SCR_WIDTH);
+    this->vertex[17] = MathUtils::getNormalizedCoord(this->y, SCR_HEIGHT);
+
+    this->vertex[24] = MathUtils::getNormalizedCoord(this->x, SCR_WIDTH);
+    this->vertex[25] = MathUtils::getNormalizedCoord(this->y + this->height, SCR_HEIGHT);
 }
 
