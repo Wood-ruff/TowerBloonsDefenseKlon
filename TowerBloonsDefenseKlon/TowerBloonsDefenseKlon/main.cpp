@@ -5,6 +5,7 @@
 #include "Globals.h"
 #include "MoB.h"
 #include "Timer.h"
+#include "Game.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
@@ -47,6 +48,8 @@ int main()
         1, 2, 3  // second triangle
     };
 
+    Game game = Game();
+
     MoB* object = new MoB(100,100,200,200,200,vertices,indices,"./defaultVertexShader.vs", "./defaultFragmentShader.fs","../res/wall.jpg");
     CTimer* timer = new CTimer();
 
@@ -55,6 +58,10 @@ int main()
         timer->update();
         processInput(window);
 
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        game.draw();
 
         Vector2D* vector = new Vector2D(object->getSpeed(), object->getSpeed());
         vector->multiply(timer->getElapsed());
@@ -62,11 +69,7 @@ int main()
         object->move(vector);
         delete vector;
 
-
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        object->draw();
+         object->draw();
 
         glfwSwapBuffers(window);
         glfwPollEvents();
