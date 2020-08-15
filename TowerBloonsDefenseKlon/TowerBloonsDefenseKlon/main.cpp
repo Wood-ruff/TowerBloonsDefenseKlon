@@ -2,11 +2,11 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include "Object.h"
+#include "Globals.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
-const unsigned int SCR_WIDTH = 1920;
-const unsigned int SCR_HEIGHT = 1080;
+
 
 int main()
 {
