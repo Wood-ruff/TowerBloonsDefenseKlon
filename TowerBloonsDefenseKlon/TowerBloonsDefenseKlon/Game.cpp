@@ -14,13 +14,13 @@ void Game::processInput()
 		glfwGetCursorPos(this->window,&xpos,&ypos);
 
 		double vertices[] = {
-			// positions           	 
+			 //Positions        //Colors	    //Tex
 			 0.0,  0.0,  0.0,   1.0, 1.0, 1.0,  1.0, 1.0,	// bottom left 
 			 0.0,  0.0,  0.0,	1.0, 0.0, 0.0,  1.0, 0.0,	// top left
 			 0.0,  0.0,  0.0,	0.0, 0.0, 1.0,	0.0, 0.0,	// top right
 			 0.0,  0.0,  0.0,	0.0, 1.0, 0.0,  0.0, 1.0	// bottom right
 		};
-		Object* newObject = new Object(xpos,ypos,100,100,vertices,"./defaultVertexShader.vs", "./defaultFragmentShader.fs", "../res/grass.jpg");
+		Object* newObject = new Object(xpos,(-1)*(ypos-SCR_HEIGHT),100,100,vertices,"./defaultVertexShader.vs", "./defaultFragmentShader.fs", "../res/grass.jpg");
 	
 		this->renderlist->add(newObject);
 	}
