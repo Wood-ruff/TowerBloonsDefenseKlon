@@ -169,6 +169,8 @@
   <ItemGroup>
     <None Include="defaultFragmentShader.fs" />
     <None Include="defaultVertexShader.vs" />
+    <None Include="GameFragmentShader.fs" />
+    <None Include="GameVertexShader.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

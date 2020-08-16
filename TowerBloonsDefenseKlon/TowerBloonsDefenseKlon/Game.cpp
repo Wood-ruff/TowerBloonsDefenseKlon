@@ -1,8 +1,24 @@
 #include "Game.h"
 #include "stb_image.h"
 #include "Shader.h"
+#include "Globals.h"
+
+
+void Game::processInput()
+{
+	if (glfwGetKey(this->window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+		glfwSetWindowShouldClose(this->window, true);
+}
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+	glViewport(0, 0, width, height);
+}
+
 
 Game::Game() {
+	this->init();
+
 	float boardVertices[] = {
 		// positions           	// textures 
 		-1.0f, -1.0f,  0.0f,    1.0f, 1.0f,		// bottom left 
@@ -41,10 +57,10 @@ Game::Game() {
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
-	glGenTextures(1, &texture);
+	glGenTextures(1, &this->texture);
 
 	// bind the texture
-	glBindTexture(GL_TEXTURE_2D, texture);
+	glBindTexture(GL_TEXTURE_2D, this->texture);
 
 	// set the texture warpping/filtering options
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -65,17 +81,80 @@ Game::Game() {
 		stbi_image_free(data);
 	}
 	else {
-		std::cout << "Failed to load the texture: awesomeface.png" << std::endl;
+		std::cout << "Failed to load grass texture" << std::endl;
 	}
 }
 
 void Game::draw() {
 	
-	glBindTexture(GL_TEXTURE_2D, texture);
-	shader->use();
+	glBindTexture(GL_TEXTURE_2D, this->texture);
+	this->shader->use();
 
-	glBindVertexArray(VAO);
+	glBindVertexArray(this->VAO);
 
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 }
+
+void Game::init() {
+	glfwInit();
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+
+	this->window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "", NULL, NULL);
+	if (this->window == NULL)
+	{
+		std::cout << "Failed to create GLFW window" << std::endl;
+		glfwTerminate();
+		return;
+	}
+	glfwMakeContextCurrent(this->window);
+	glfwSetFramebufferSizeCallback(this->window, framebuffer_size_callback);
+
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+	{
+		std::cout << "Failed to initialize GLAD" << std::endl;
+		return;
+	}
+}
+
+void Game::gameloop() {
+	double vertices[] = {
+		// positions          // colors           // texture coords
+		 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
+		 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
+		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
+		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
+	};
+
+
+	MoB* object = new MoB(100, 100, 200, 200, 200, vertices, "./defaultVertexShader.vs", "./defaultFragmentShader.fs", "../res/wall.jpg");
+	CTimer* timer = new CTimer();
+
+	while (!glfwWindowShouldClose(this->window))
+	{
+		timer->update();
+		processInput();
+
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		this->draw();
+
+		Vector2D* vector = new Vector2D(object->getSpeed(), object->getSpeed());
+		vector->multiply(timer->getElapsed());
+		object->move(vector);
+		delete vector;
+
+		object->draw();
+
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+	}
+
+	glfwTerminate();
+}
+
+

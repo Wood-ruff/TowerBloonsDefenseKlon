@@ -79,5 +79,11 @@
     <None Include="defaultFragmentShader.fs">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="GameVertexShader.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="GameFragmentShader.fs">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
