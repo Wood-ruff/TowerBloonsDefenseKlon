@@ -20,7 +20,7 @@ void Game::processInput()
 			 0.0,  0.0,  0.0,	0.0, 0.0, 1.0,	0.0, 0.0,	// top right
 			 0.0,  0.0,  0.0,	0.0, 1.0, 0.0,  0.0, 1.0	// bottom right
 		};
-		Object* newObject = new Object(xpos,(-1)*(ypos-SCR_HEIGHT),100,100,vertices,"./defaultVertexShader.vs", "./defaultFragmentShader.fs", "../res/grass.jpg");
+		Object* newObject = new Object(xpos,(-1)*(ypos-SCR_HEIGHT),100,100,vertices,"./GameVertexShader.vs", "./GameFragmentShader.fs", "../res/wall.jpg");
 	
 		this->renderlist->add(newObject);
 	}
