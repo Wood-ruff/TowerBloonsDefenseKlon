@@ -144,7 +144,7 @@ void Game::gameloop() {
 		this->draw();
 
 		Vector2D* vector = new Vector2D(object->getSpeed(), object->getSpeed());
-		vector->multiply(timer->getElapsed());
+		*vector *= timer->getElapsed();
 		object->move(vector);
 		delete vector;
 

@@ -3,9 +3,9 @@
 class Vector2D {
 public:
 	Vector2D(double, double);
-	void add(Vector2D);
-	void divide(double);
-	void multiply(double);
+	void operator += (Vector2D);
+	void operator /=(double);
+	void operator *=(double);
 	double getX() { return x; }
 	double getY() { return y; }
 
