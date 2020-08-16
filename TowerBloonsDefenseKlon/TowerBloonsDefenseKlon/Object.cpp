@@ -55,6 +55,8 @@ Object::Object(double x, double y, double width, double height,double* vertex, c
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
 
+    if (texturePath == nullptr)return;
+
     int width1, height1, nrChannels;
     unsigned char* data = stbi_load(texturePath, &width1, &height1, &nrChannels, 0);
     if (data) {
@@ -74,8 +76,10 @@ Object::Object(double x, double y, double width, double height,double* vertex, c
 }
 
 void Object::draw() {
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, texture);
+    if (this->texture != NULL) {
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, this->texture);
+    }
     glBindVertexArray(VAO);
     shader->use();
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);

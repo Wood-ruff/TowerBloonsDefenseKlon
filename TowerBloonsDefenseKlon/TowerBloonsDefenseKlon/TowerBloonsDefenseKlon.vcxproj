@@ -162,6 +162,7 @@
     <ClInclude Include="MoB.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="Stack.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Vector2D.h" />
