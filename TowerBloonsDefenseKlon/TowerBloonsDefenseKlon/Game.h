@@ -4,6 +4,7 @@
 #include "MoB.h"
 #include "Timer.h"
 #include "Game.h"
+#include "Stack.h"
 #include "Shader.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -16,6 +17,7 @@ public:
 	void gameloop();
 
 private:
+	Stack<Object>* renderlist;
 	unsigned int VAO, VBO, EBO, texture;
 	float* boardVertices;
 	Shader* shader;	

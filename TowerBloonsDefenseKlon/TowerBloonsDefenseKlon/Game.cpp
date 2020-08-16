@@ -8,6 +8,22 @@ void Game::processInput()
 {
 	if (glfwGetKey(this->window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(this->window, true);
+	
+	if (glfwGetMouseButton(this->window, GLFW_MOUSE_BUTTON_LEFT == GLFW_PRESS)) {
+		double xpos, ypos;
+		glfwGetCursorPos(this->window,&xpos,&ypos);
+
+		double vertices[] = {
+			// positions           	 
+			 0.0,  0.0,  0.0,   1.0, 1.0, 1.0,  1.0, 1.0,	// bottom left 
+			 0.0,  0.0,  0.0,	1.0, 0.0, 0.0,  1.0, 0.0,	// top left
+			 0.0,  0.0,  0.0,	0.0, 0.0, 1.0,	0.0, 0.0,	// top right
+			 0.0,  0.0,  0.0,	0.0, 1.0, 0.0,  0.0, 1.0	// bottom right
+		};
+		Object* newObject = new Object(xpos,ypos,100,100,vertices,"./defaultVertexShader.vs", "./defaultFragmentShader.fs", "../res/grass.jpg");
+	
+		this->renderlist->add(newObject);
+	}
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -85,18 +101,9 @@ Game::Game() {
 	}
 }
 
-void Game::draw() {
-	
-	glBindTexture(GL_TEXTURE_2D, this->texture);
-	this->shader->use();
-
-	glBindVertexArray(this->VAO);
-
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-	glBindVertexArray(0);
-}
 
 void Game::init() {
+	this->renderlist = new Stack<Object>();
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -120,17 +127,25 @@ void Game::init() {
 	}
 }
 
+void singleDrawMethod(Object* object) {
+	object->draw();
+}
+
+void Game::draw() {
+	
+	glBindTexture(GL_TEXTURE_2D, this->texture);
+	this->shader->use();
+
+	glBindVertexArray(this->VAO);
+
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	glBindVertexArray(0);
+
+	this->renderlist->forEach(&singleDrawMethod);
+}
+
 void Game::gameloop() {
-	double vertices[] = {
-		// positions          // colors           // texture coords
-		 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-		 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
-	};
 
-
-	MoB* object = new MoB(100, 100, 200, 200, 200, vertices, "./defaultVertexShader.vs", "./defaultFragmentShader.fs", "../res/wall.jpg");
 	CTimer* timer = new CTimer();
 
 	while (!glfwWindowShouldClose(this->window))
@@ -142,13 +157,6 @@ void Game::gameloop() {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		this->draw();
-
-		Vector2D* vector = new Vector2D(object->getSpeed(), object->getSpeed());
-		*vector *= timer->getElapsed();
-		object->move(vector);
-		delete vector;
-
-		object->draw();
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
